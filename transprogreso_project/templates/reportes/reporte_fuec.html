@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Reporte de FUEC</h2>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>N°</th>
+            <th>Cliente</th>
+            <th>Vehículo</th>
+            <th>Conductor</th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
+            <th>Ruta</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for f in fuecs %}
+        <tr>
+            <td>{{ f.numero }}</td>
+            <td>{{ f.cliente.nombre }}</td>
+            <td>{{ f.vehiculo.placa }}</td>
+            <td>{{ f.conductor.nombre }}</td>
+            <td>{{ f.fecha_inicio }}</td>
+            <td>{{ f.fecha_fin }}</td>
+            <td>{{ f.ruta }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

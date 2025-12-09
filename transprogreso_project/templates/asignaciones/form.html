@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Asignar Conductor a Vehículo</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label class="form-label">Vehículo</label>
+            <select name="vehiculo" class="form-control" required>
+                <option value="">Seleccione...</option>
+                {% for v in vehiculos %}
+                <option value="{{ v.id }}">{{ v.placa }} - {{ v.marca }} {{ v.modelo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Conductor</label>
+            <select name="conductor" class="form-control" required>
+                <option value="">Seleccione...</option>
+                {% for c in conductores %}
+                <option value="{{ c.id }}">{{ c.nombre }} ({{ c.cedula }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button class="btn btn-success">Asignar</button>
+        <a href="{% url 'asignaciones' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</div>
+
+{% endblock %}

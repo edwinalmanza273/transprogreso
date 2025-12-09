@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card shadow p-4" style="max-width:600px;margin:auto;">
+    <h3>{{ vehiculo|default:"Nuevo Vehículo" }}</h3>
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Placa</label>
+        <input name="placa" value="{{ vehiculo.placa|default:'' }}" class="form-control mb-2">
+
+        <label>Marca</label>
+        <input name="marca" value="{{ vehiculo.marca|default:'' }}" class="form-control mb-2">
+
+        <label>Modelo</label>
+        <input name="modelo" value="{{ vehiculo.modelo|default:'' }}" class="form-control mb-2">
+
+        <label>Clase</label>
+        <input name="clase" value="{{ vehiculo.clase|default:'' }}" class="form-control mb-2">
+
+        <button class="btn btn-success mt-2">Guardar</button>
+        <a href="/vehiculos/" class="btn btn-secondary mt-2">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}
+
+

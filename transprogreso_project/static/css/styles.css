@@ -1,0 +1,42 @@
+body {
+    background: #111;
+    color: #eee;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.table {
+    background: #1c1c1c;
+    color: #ddd;
+}
+
+.table th {
+    background: #222;
+    color: #fff;
+}
+
+.btn-primary {
+    background: #007bff;
+    border: none;
+}
+
+.btn-warning {
+    background: #f0ad4e;
+    border: none;
+}
+
+.btn-danger {
+    background: #d9534f;
+    border: none;
+}
+
+.navbar {
+    background: #000;
+}
+
+.nav-link, .navbar-brand {
+    color: #fff !important;
+}

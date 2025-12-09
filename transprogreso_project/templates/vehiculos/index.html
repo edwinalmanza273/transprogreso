@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Inicio · Transprogreso{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card p-4">
+      <h1 class="page-title mb-2">Bienvenido a <span class="text-teal">Transprogreso</span> 🚌</h1>
+      <p class="text-muted">Gestión rápida de vehículos, documentos y revisiones.</p>
+
+      <div class="row g-3 mt-2">
+        <div class="col-md-3">
+          <a class="btn btn-teal w-100 btn-success" href="{% url 'lista_vehiculos' %}">Ver vehículos</a>
+        </div>
+        <div class="col-md-3">
+          <a class="btn btn-teal w-100 btn-success" href="{% url 'alertas_vencimiento' %}">Ver alertas</a>
+        </div>
+        <div class="col-md-3">
+          <a class="btn btn-teal w-100 btn-success" href="{% url 'cargar_documento' %}">Cargar documento</a>
+        </div>
+        <div class="col-md-3">
+          <a class="btn btn-teal w-100 btn-success" href="{% url 'nueva_revision' %}">Programar revisión</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center text-muted mt-4">
+      © Transprogreso — Sistema de gestión de vehículos
+    </div>
+  </div>
+</div>
+{% endblock %}

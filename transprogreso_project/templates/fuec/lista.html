@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Gestión FUEC</h3>
+
+<a href="{% url 'fuec_crear' %}" class="btn btn-primary mb-3">
+    Crear FUEC
+</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vehículo</th>
+            <th>Conductor</th>
+            <th>Cliente</th>
+            <th>Fecha Emisión</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in fuecs %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.vehiculo.placa }}</td>
+            <td>{{ item.conductor.nombre }}</td>
+            <td>{{ item.cliente.nombre }}</td>
+            <td>{{ item.fecha_emision }}</td>
+
+            <td>
+                <a href="{% url 'fuec_detalle' item.id %}" class="btn btn-sm btn-info">Ver</a>
+                <a href="{% url 'fuec_editar' item.id %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'fuec_eliminar' item.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">No hay FUEC registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+
+
+
+
+

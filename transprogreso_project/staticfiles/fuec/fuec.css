@@ -1,0 +1,92 @@
+/* ============================
+   CONFIGURACIÓN GENERAL
+============================ */
+@page {
+    size: A4 portrait;
+    margin: 12mm 10mm;   /* márgenes seguros */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+/* Contenedor principal con ancho controlado */
+.container-fuec {
+    width: 98%;            /* evita desbordes */
+    max-width: 770px;      /* ancho ideal para A4 */
+    margin: 0 auto;
+    transform: scale(0.96);      /* reduce un 4% para asegurar ajuste */
+    transform-origin: top center;
+}
+
+/* ============================
+   TABLAS
+============================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;       /* evitar expansión */
+}
+
+td, th {
+    border: 1px solid #555;
+    padding: 4px;
+    word-wrap: break-word;      /* romper textos largos */
+}
+
+/* ============================
+   TITULOS
+============================ */
+.titulo-principal {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.subtitulo {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* ============================
+   LOGOS
+============================ */
+.logos {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.logos img {
+    height: 55px;
+    margin: 3px 8px;
+}
+
+/* ============================
+   FIRMA
+============================ */
+.firma-container {
+    width: 260px;
+    border: 2px solid #0a0;
+    padding: 5px;
+    border-radius: 6px;
+    margin: 5px auto;
+}
+
+.firma-container img {
+    width: 100%;
+}
+
+/* ============================
+   QR
+============================ */
+.qr {
+    text-align: center;
+}
+
+.qr img {
+    width: 120px;
+}

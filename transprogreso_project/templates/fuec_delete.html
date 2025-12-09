@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="text-danger mb-3">Eliminar FUEC</h2>
+
+<p>¿Desea eliminar el FUEC <strong>{{ fuec.numero }}</strong>?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger">Eliminar</button>
+    <a href="/fuec/" class="btn btn-secondary">Cancelar</a>
+</form>
+
+{% endblock %}
+
+

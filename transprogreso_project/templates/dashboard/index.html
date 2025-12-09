@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">📊 Dashboard General</h2>
+
+    <!-- TARJETAS -->
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Vehículos</h5>
+                    <h2>{{ total_vehiculos }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Conductores</h5>
+                    <h2>{{ total_conductores }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Clientes</h5>
+                    <h2>{{ total_clientes }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">FUEC Emitidos</h5>
+                    <h2>{{ total_fuec }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- GRAFICA 1 -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4 class="card-title">Alertas de Vehículos</h4>
+            <canvas id="vehiculosChart"></canvas>
+        </div>
+    </div>
+
+    <!-- GRAFICA 2 -->
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Estado de Licencias</h4>
+            <canvas id="licenciasChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<!-- CHART JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const vehiculosChart = document.getElementById('vehiculosChart');
+    new Chart(vehiculosChart, {
+        type: 'bar',
+        data: {
+            labels: ['Vencidos', 'Por vencer'],
+            datasets: [{
+                label: 'Documentos de Vehículos',
+                data: [{{ vencidos }}, {{ por_vencer }}],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    const licenciasChart = document.getElementById('licenciasChart');
+    new Chart(licenciasChart, {
+        type: 'pie',
+        data: {
+            labels: ['Vencidas', 'Por vencer'],
+            datasets: [{
+                data: [{{ licencias_vencidas }}, {{ licencias_por_vencer }}]
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

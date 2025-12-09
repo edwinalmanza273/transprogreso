@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('../img/fondo.jpg') no-repeat center top;
+    background-size: cover;
+    margin: 0;
+}
+
+.hoja {
+    width: 90%;
+    margin: 20px auto;
+    padding: 25px;
+    background: rgba(255,255,255,0.90);
+    border-radius: 8px;
+}
+
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-colombia { width: 120px; }
+.logo-super { width: 150px; }
+.logo-trans { width: 200px; }
+
+.titulo {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.tabla-datos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.tabla-datos td {
+    border: 1px solid #333;
+    padding: 6px;
+    font-size: 13px;
+}
+
+.qr-firma-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.texto-firma {
+    text-align: center;
+    font-size: 12px;
+}
+

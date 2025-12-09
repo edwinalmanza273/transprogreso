@@ -1,0 +1,35 @@
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Fecha de vencimiento</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for item in lista %}
+        <tr>
+            <td>{{ item.placa }}</td>
+
+            <td>
+                {% if campo == "soat" %}
+                    {{ item.soat_vencimiento }}
+
+                {% elif campo == "tecno" %}
+                    {{ item.tecnomecanica_vencimiento }}
+
+                {% elif campo == "poliza_contra" %}
+                    {{ item.poliza_contractual_vencimiento }}
+
+                {% elif campo == "poliza_extra" %}
+                    {{ item.poliza_extrajudicial_vencimiento }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if lista|length == 0 %}
+<p class="text-center text-muted">Sin vencimientos próximos.</p>
+{% endif %}

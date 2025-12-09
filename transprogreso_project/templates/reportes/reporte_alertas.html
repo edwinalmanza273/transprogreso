@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Reporte de Alertas</h2>
+
+{% if alertas %}
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Tipo de alerta</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in alertas %}
+        <tr>
+            <td>{{ a.tipo }}</td>
+            <td>{{ a.descripcion }}</td>
+            <td>{{ a.fecha }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay alertas registradas.</p>
+{% endif %}
+
+{% endblock %}

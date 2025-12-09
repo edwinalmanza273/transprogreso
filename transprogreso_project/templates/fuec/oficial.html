@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 25px;
+        font-size: 13px;
+    }
+
+    /* LOGOS */
+    .logos {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .logos img {
+        height: 65px;
+        margin: 0 25px;
+    }
+
+    h2, h3 {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 13px;
+    }
+
+    th, td {
+        border: 1px solid #444;
+        padding: 6px;
+    }
+
+    th {
+        background: #d9d9d9;
+        font-weight: bold;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    /* BLOQUE DE FIRMA Y QR */
+    .footer-box {
+        width: 100%;
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .firma-box {
+        width: 48%;
+        border: 3px solid #009900;
+        border-radius: 12px;
+        text-align: center;
+        padding: 10px 5px;
+    }
+
+    .firma-box img {
+        width: 90%;
+    }
+
+    .qr-box {
+        width: 48%;
+        text-align: center;
+    }
+
+    .qr-box img {
+        width: 180px;
+    }
+
+    .qr-label {
+        font-size: 11px;
+        margin-top: 5px;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- LOGOS -->
+<div class="container-fuec">
+
+    <div class="logos">
+        <img src="{% static 'fuec/logo_colombia.png' %}">
+        <img src="{% static 'fuec/logo_supertransporte.png' %}">
+        <img src="{% static 'fuec/logo_transprogreso.png' %}">
+    </div>
+
+<h2>FORMATO ÚNICO DE EXTRACTO DEL CONTRATO DEL SERVICIO PÚBLICO DE TRANSPORTE TERRESTRE AUTOMOTOR ESPECIAL</h2>
+<h3>No. {{ f.numero }}</h3>
+
+<!-- CONTRATO -->
+<table>
+    <tr><th colspan="2">CONTRATO</th></tr>
+
+    <tr>
+        <th>CONTRATANTE:</th>
+        <td>TRANSPROGRESO S.A.S — NIT 900.606.558-4</td>
+    </tr>
+
+    <tr>
+        <th>OBJETO DEL CONTRATO:</th>
+        <td>{{ f.objeto_contrato }}</td>
+    </tr>
+
+    <tr>
+        <th>ORIGEN - DESTINO:</th>
+        <td>{{ f.origen_destino }}</td>
+    </tr>
+</table>
+
+<!-- VIGENCIA -->
+<table>
+    <tr><th colspan="4">VIGENCIA DEL CONTRATO</th></tr>
+
+    <tr>
+        <th>FECHA INICIAL</th>
+        <td class="center">{{ f.fecha_inicio }}</td>
+
+        <th>FECHA VENCIMIENTO</th>
+        <td class="center">{{ f.fecha_fin }}</td>
+    </tr>
+</table>
+
+<!-- VEHÍCULO -->
+<table>
+    <tr><th colspan="4">CARACTERÍSTICAS DEL VEHÍCULO</th></tr>
+
+    <tr>
+        <th>PLACA</th>
+        <td>{{ f.vehiculo.placa }}</td>
+
+        <th>MODELO</th>
+        <td>{{ f.vehiculo.modelo }}</td>
+    </tr>
+
+    <tr>
+        <th>MARCA</th>
+        <td>{{ f.vehiculo.marca }}</td>
+
+        <th>CLASE</th>
+        <td>{{ f.vehiculo.clase }}</td>
+    </tr>
+
+    <tr>
+        <th>NÚMERO TARJETA DE OPERACIÓN</th>
+        <td colspan="3">________________</td>
+    </tr>
+</table>
+
+<!-- CONDUCTORES -->
+<table>
+    <tr><th colspan="3">CONDUCTORES</th></tr>
+
+    <tr>
+        <th>NOMBRE COMPLETO</th>
+        <th>CÉDULA</th>
+        <th>TELÉFONO</th>
+    </tr>
+
+    {% if f.conductor %}
+    <tr>
+        <td>{{ f.conductor.nombres }} {{ f.conductor.apellidos }}</td>
+        <td class="center">{{ f.conductor.cedula }}</td>
+        <td class="center">{{ f.conductor.telefono }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="3" class="center">SIN CONDUCTORES REGISTRADOS</td>
+    </tr>
+    {% endif %}
+</table>
+
+<!-- FIRMA + QR -->
+<div class="footer-box">
+
+    <!-- FIRMA -->
+    <div class="firma-box">
+        <img src="{% static 'fuec/firma_sello_transprogreso.png' %}">
+    </div>
+
+    <!-- QR -->
+    <div class="qr-box">
+        <img src="data:image/png;base64,{{ qr }}">
+        <div class="qr-label">Verificación del FUEC</div>
+    </div>
+
+</div>
+
+</body>
+</html>
+

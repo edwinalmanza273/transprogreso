@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Detalles del Cliente</h2>
+
+<ul>
+    <li><strong>Nombre:</strong> {{ cliente.nombre }}</li>
+    <li><strong>Identificación:</strong> {{ cliente.identificacion }}</li>
+    <li><strong>Teléfono:</strong> {{ cliente.telefono }}</li>
+    <li><strong>Correo:</strong> {{ cliente.correo }}</li>
+    <li><strong>Dirección:</strong> {{ cliente.direccion }}</li>
+</ul>
+
+<a href="{% url 'clientes' %}">Volver</a>
+
+{% endblock %}

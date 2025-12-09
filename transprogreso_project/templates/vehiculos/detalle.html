@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-3">Detalles del Vehículo {{ vehiculo.placa }}</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Placa:</strong> {{ vehiculo.placa }}</li>
+        <li class="list-group-item"><strong>Marca:</strong> {{ vehiculo.marca }}</li>
+        <li class="list-group-item"><strong>Modelo:</strong> {{ vehiculo.modelo }}</li>
+        <li class="list-group-item"><strong>Capacidad:</strong> {{ vehiculo.capacidad }}</li>
+
+        <li class="list-group-item"><strong>SOAT:</strong> {{ vehiculo.soat_fecha }}</li>
+        <li class="list-group-item"><strong>Tecnomecánica:</strong> {{ vehiculo.tecnomecanica_fecha }}</li>
+        <li class="list-group-item"><strong>Póliza:</strong> {{ vehiculo.poliza_fecha }}</li>
+        <li class="list-group-item"><strong>Extrajudicial:</strong> {{ vehiculo.extrajudicial_fecha }}</li>
+    </ul>
+
+    <a href="{% url 'vehiculos' %}" class="btn btn-secondary mt-3">Volver</a>
+
+</div>
+
+{% endblock %}

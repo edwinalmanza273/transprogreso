@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Crear Usuario</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="card p-4 shadow-sm">
+
+        <h5>Datos del Usuario</h5>
+        {{ form_user.as_p }}
+
+        <hr>
+
+        <h5>Rol dentro del sistema</h5>
+        {{ form_perfil.as_p }}
+
+        <button class="btn btn-green mt-3">Guardar Usuario</button>
+
+    </div>
+
+</form>
+
+{% endblock %}

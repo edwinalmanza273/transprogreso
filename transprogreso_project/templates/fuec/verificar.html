@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Verificación del FUEC</title>
+
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+
+        .logos {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logos img {
+            height: 40px;
+            margin: 0 12px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 22px;
+            color: #2c3e50;
+        }
+
+        .estado {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .estado.verde { background: #2ecc71; }
+        .estado.rojo { background: #e74c3c; }
+        .estado.naranja { background: #f39c12; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        td {
+            padding: 8px 6px;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        td:first-child {
+            font-weight: bold;
+            width: 40%;
+            color: #2c3e50;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logos">
+        <img src="/static/fuec/logo_colombia.png">
+        <img src="/static/fuec/logo_supertransporte.png">
+        <img src="/static/fuec/logo_transprogreso.png">
+    </div>
+
+    <h2>Verificación del FUEC</h2>
+
+    {% if error %}
+        <div class="estado rojo">
+            {{ error }}
+        </div>
+
+    {% else %}
+
+        <!-- Estado con colores -->
+        <div class="estado 
+            {% if color == 'green' %}verde{% endif %}
+            {% if color == 'red' %}rojo{% endif %}
+            {% if color == 'orange' %}naranja{% endif %}
+        ">
+            Estado del FUEC: {{ estado }}
+        </div>
+
+        <table>
+            <tr><td>Número FUEC:</td><td>{{ fuec.id }}</td></tr>
+            <tr><td>Contratante:</td><td>TRANSPROGRESO S.A.S</td></tr>
+            <tr><td>Objeto del contrato:</td><td>{{ fuec.objeto_contrato }}</td></tr>
+            <tr><td>Origen - Destino:</td><td>{{ fuec.origen_destino }}</td></tr>
+            <tr><td>Vehículo:</td><td>{{ fuec.vehiculo.placa }} — {{ fuec.vehiculo.marca }}</td></tr>
+            <tr><td>Conductor:</td>
+                <td>{{ fuec.conductor.nombres }} {{ fuec.conductor.apellidos }}</td>
+            </tr>
+            <tr><td>Fecha inicio:</td><td>{{ fuec.fecha_inicio }}</td></tr>
+            <tr><td>Fecha fin:</td><td>{{ fuec.fecha_fin }}</td></tr>
+        </table>
+
+    {% endif %}
+
+    <div class="footer">
+        © Sistema de Verificación de FUEC — Transprogreso S.A.S
+    </div>
+
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Detalles del Conductor</h2>
+
+<ul>
+    <li><strong>Nombre:</strong> {{ conductor.nombre }}</li>
+    <li><strong>Cédula:</strong> {{ conductor.cedula }}</li>
+    <li><strong>Licencia:</strong> {{ conductor.licencia }}</li>
+    <li><strong>Categoría:</strong> {{ conductor.categoria }}</li>
+    <li><strong>Vencimiento:</strong> {{ conductor.licencia_vencimiento }}</li>
+</ul>
+
+<a href="{% url 'conductores' %}">Volver</a>
+
+{% endblock %}
+

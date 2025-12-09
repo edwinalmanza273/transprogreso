@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">📄 Formulario FUEC</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label>Número de contrato</label>
+            <input type="text" name="numero" class="form-control" value="{{ fuec.numero }}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Origen / Destino</label>
+            <input type="text" name="origen_destino" class="form-control" value="{{ fuec.origen_destino }}">
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label>Objeto del contrato</label>
+            <textarea name="objeto_contrato" class="form-control">{{ fuec.objeto_contrato }}</textarea>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Fecha inicio</label>
+            <input type="date" class="form-control" name="fecha_inicio" value="{{ fuec.fecha_inicio|date:'Y-m-d' }}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Fecha fin</label>
+            <input type="date" class="form-control" name="fecha_fin" value="{{ fuec.fecha_fin|date:'Y-m-d' }}">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Vehículo</label>
+            <select name="vehiculo" class="form-control">
+                {% for v in vehiculos %}
+                <option value="{{ v.id }}" {% if fuec.vehiculo.id == v.id %}selected{% endif %}>
+                    {{ v.placa }} - {{ v.marca }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Conductor</label>
+            <select name="conductor" class="form-control">
+                {% for c in conductores %}
+                <option value="{{ c.id }}" {% if fuec.conductor.id == c.id %}selected{% endif %}>
+                    {{ c.nombres }} {{ c.apellidos }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </div>
+
+    <button class="btn btn-success">Guardar</button>
+    <a href="/fuec/" class="btn btn-secondary">Cancelar</a>
+
+</form>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

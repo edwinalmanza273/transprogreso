@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Asignaciones Vehículo ↔ Conductor</h2>
+
+    <a href="{% url 'asignar_conductor' %}" class="btn btn-primary mb-3">Nueva Asignación</a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Vehículo</th>
+                <th>Conductor</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in asignaciones %}
+            <tr>
+                <td>{{ a.vehiculo.placa }}</td>
+                <td>{{ a.conductor.nombre }}</td>
+                <td>{{ a.fecha_asignacion }}</td>
+                <td>
+                    {% if a.activo %}
+                        <span class="badge bg-success">ACTIVO</span>
+                    {% else %}
+                        <span class="badge bg-secondary">INACTIVO</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Validar documento{% endblock %}
+{% block content %}
+<div class="container mt-4">
+<h3>Validar documento</h3>
+<p>¿Confirmas que el documento de <strong>{{ documento }}</strong> fue verificado?</p>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-success" type="submit">Validar</button>
+    <a class="btn btn-outline-secondary" href="{% url 'alertas_vencimiento' %}">Cancelar</a>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>FUEC {{ fuec.id }}</title>
+<style>
+  /* Tamaño carta / A4 (ajusta si tu plantilla no es A4) */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  .page {
+    position: relative;
+    width: 210mm;   /* A4 */
+    height: 297mm;  /* A4 */
+    overflow: hidden;
+  }
+  /* Fondo oficial como imagen a página completa */
+  .bg {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover; /* o 'contain' si tu PNG tiene márgenes blancos */
+    /* El fondo viene como data URI base64 desde la vista */
+    background-image: url("{{ fondo_b64 }}");
+    z-index: 1;
+  }
+  /* Capa de texto encima del fondo */
+  .layer {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+  }
+
+  /* Utilidades de posicionamiento: se colocan por coordenadas relativas a la página */
+  .field {
+    position: absolute;
+    font-size: 11pt;           /* Ajusta según escala de tu PNG */
+    line-height: 1.2;
+    white-space: pre;          /* respeta espacios si quieres alinear con guiones */
+  }
+  .field.small { font-size: 9pt; }
+  .field.big   { font-size: 12pt; font-weight: bold; }
+
+  /*
+   * OJO: Estas coordenadas (top/left) son un punto de partida.
+   * Ajusta los % para que el texto caiga EXACTO sobre cada casilla de tu imagen PNG.
+   * Haz pequeños cambios (±0.2%) y refresca el PDF hasta encajar perfecto.
+   */
+
+  /* Encabezado: razón social / NIT / empresa habilitada */
+  .f-razon-social   { top: 13.5%; left: 8%;   width: 84%; }
+  .f-nit            { top: 16.0%; left: 8%;   width: 40%; }
+  .f-reso-habilita  { top: 16.0%; left: 55%;  width: 37%; }
+
+  /* Contratante */
+  .f-contratante    { top: 21.6%; left: 8%;   width: 84%; }
+  .f-nit-contrat    { top: 23.8%; left: 8%;   width: 40%; }
+
+  /* Objeto */
+  .f-objeto         { top: 29.4%; left: 8%;   width: 84%; }
+
+  /* Origen – Destino */
+  .f-origen-destino { top: 34.7%; left: 8%;   width: 84%; }
+
+  /* Vigencia */
+  .f-vigencia-desde { top: 40.0%; left: 8%;   width: 40%; }
+  .f-vigencia-hasta { top: 40.0%; left: 55%;  width: 37%; }
+
+  /* Vehículo */
+  .f-placa          { top: 46.0%; left: 8%;   width: 25%; }
+  .f-clase          { top: 46.0%; left: 35%;  width: 25%; }
+  .f-marca          { top: 46.0%; left: 62%;  width: 30%; }
+
+  .f-modelo         { top: 49.0%; left: 8%;   width: 25%; }
+  .f-licencia       { top: 49.0%; left: 35%;  width: 25%; }
+  .f-capacidad      { top: 49.0%; left: 62%;  width: 30%; }
+
+  /* Conductores (principal / alterno) */
+  .f-cond-1-nombre  { top: 55.2%; left: 8%;   width: 50%; }
+  .f-cond-1-doc     { top: 55.2%; left: 62%;  width: 30%; }
+
+  .f-cond-2-nombre  { top: 58.0%; left: 8%;   width: 50%; }
+  .f-cond-2-doc     { top: 58.0%; left: 62%;  width: 30%; }
+
+  /* Observaciones */
+  .f-observ         { top: 63.5%; left: 8%;   width: 84%; }
+
+  /* Firma / fecha de creación (si aplica en tu diseño) */
+  .f-ciudad-fecha   { top: 85.0%; left: 8%;   width: 84%; font-size: 10pt; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="bg"></div>
+    <div class="layer">
+
+      <!-- Encabezado / Empresa habilitada -->
+      <div class="field f-razon-social big">
+        {{ EMPRESA_RAZON|default:"TRANSPROGRESO S.A.S." }}
+      </div>
+      <div class="field f-nit">
+        NIT: {{ EMPRESA_NIT|default:"901234567-8" }}
+      </div>
+      <div class="field f-reso-habilita small">
+        Resolución Habilitación: {{ EMPRESA_RESOLUCION|default:"0000 de 20XX" }}
+      </div>
+
+      <!-- Contratante -->
+      <div class="field f-contratante">
+        CONTRATANTE: {{ fuec.empresa_contratante|default:"" }}
+      </div>
+      <div class="field f-nit-contrat">
+        NIT/CC: {{ fuec.nit_contratante|default:"" }}
+      </div>
+
+      <!-- Objeto -->
+      <div class="field f-objeto">
+        OBJETO: {{ fuec.objeto|default:"" }}
+      </div>
+
+      <!-- Origen – Destino -->
+      <div class="field f-origen-destino">
+        ORIGEN – DESTINO: {{ fuec.origen_destino|default:"" }}
+      </div>
+
+      <!-- Vigencia -->
+      <div class="field f-vigencia-desde">
+        VIGENCIA DESDE: {{ fuec.vigencia_desde|date:"d/m/Y"|default:"" }}
+      </div>
+      <div class="field f-vigencia-hasta">
+        VIGENCIA HASTA: {{ fuec.vigencia_hasta|date:"d/m/Y"|default:"" }}
+      </div>
+
+      <!-- Vehículo (campos tomados del related) -->
+      <div class="field f-placa">
+        PLACA: {{ fuec.vehiculo.placa|default:"" }}
+      </div>
+      <div class="field f-clase">
+        CLASE: {{ fuec.vehiculo.clase|default:"" }}
+      </div>
+      <div class="field f-marca">
+        MARCA: {{ fuec.vehiculo.marca|default:"" }}
+      </div>
+
+      <div class="field f-modelo">
+        MODELO: {{ fuec.vehiculo.modelo|default:"" }}
+      </div>
+      <div class="field f-licencia">
+        LICENCIA: {{ fuec.vehiculo.licencia_transito|default:"" }}
+      </div>
+      <div class="field f-capacidad">
+        CAPACIDAD: {{ fuec.vehiculo.capacidad|default:"" }}
+      </div>
+
+      <!-- Conductores (ajusta a tus nombres de campos reales) -->
+      <div class="field f-cond-1-nombre">
+        CONDUCTOR 1: {{ fuec.conductor_principal.nombre|default:fuec.conductor_principal|default:"" }}
+      </div>
+      <div class="field f-cond-1-doc">
+        DOC: {{ fuec.conductor_principal.documento|default:"" }}
+      </div>
+
+      <div class="field f-cond-2-nombre">
+        CONDUCTOR 2: {{ fuec.conductor_alterno.nombre|default:fuec.conductor_alterno|default:"" }}
+      </div>
+      <div class="field f-cond-2-doc">
+        DOC: {{ fuec.conductor_alterno.documento|default:"" }}
+      </div>
+
+      <!-- Observaciones -->
+      <div class="field f-observ">
+        OBSERVACIONES: {{ fuec.observaciones|default:"" }}
+      </div>
+
+      <!-- Pie: ciudad/fecha de expedición (opcional) -->
+      <div class="field f-ciudad-fecha">
+        {{ EMPRESA_CIUDAD|default:"Barranquilla" }}, {{ fuec.creado|date:"d/m/Y" }}
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
+
+

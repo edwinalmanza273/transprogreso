@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h3>¿Eliminar FUEC {{ fuec.numero }}?</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'fuec_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

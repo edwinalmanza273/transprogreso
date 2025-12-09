@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Nuevo FUEC — Transprogreso{% endblock %}
+{% block content %}
+  <h2 class="mb-3">Nuevo FUEC</h2>
+  <div class="alert alert-warning">
+    Formulario mínimo de demostración.
+    <ol class="mb-0">
+      <li>Entra al <a href="/admin/" target="_blank">Admin</a> y crea un FUEC (nota el ID).</li>
+      <li>Abre <code>/fuec/&lt;ID&gt;/oficial/</code> para ver la plantilla oficial (y <code>/fuec/&lt;ID&gt;/oficial.pdf</code> si tienes WeasyPrint).</li>
+    </ol>
+  </div>
+  <a class="btn btn-outline-secondary" href="{% url 'index' %}">← Inicio</a>
+{% endblock %}
+

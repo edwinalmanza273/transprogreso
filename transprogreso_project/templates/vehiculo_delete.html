@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow p-4" style="max-width:500px;margin:auto;">
+    <h4>¿Eliminar vehículo?</h4>
+    <hr>
+
+    <p><strong>{{ vehiculo.placa }}</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger">Eliminar</button>
+        <a href="/vehiculos/" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}
+
+

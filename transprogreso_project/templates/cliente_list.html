@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">🧑‍🤝‍🧑 Lista de Clientes</h2>
+
+<a href="/clientes/nuevo/" class="btn btn-primary mb-3">➕ Crear Cliente</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Identificación</th>
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for c in clientes %}
+        <tr>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.tipo }}</td>
+            <td>{{ c.identificacion }}</td>
+            <td>{{ c.telefono }}</td>
+            <td>{{ c.correo }}</td>
+            <td>
+                <a href="/clientes/editar/{{ c.id }}/" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/clientes/eliminar/{{ c.id }}/" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="text-center">No hay clientes registrados</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+
+
+
+

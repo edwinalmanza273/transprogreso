@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Reporte de Vehículos</h2>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Capacidad</th>
+            <th>SOAT</th>
+            <th>Tecnomecánica</th>
+            <th>Póliza</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for v in vehiculos %}
+        <tr>
+            <td>{{ v.placa }}</td>
+            <td>{{ v.marca }}</td>
+            <td>{{ v.modelo }}</td>
+            <td>{{ v.capacidad }}</td>
+            <td>{{ v.soat_fecha }}</td>
+            <td>{{ v.tecnomecanica_fecha }}</td>
+            <td>{{ v.poliza_fecha }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

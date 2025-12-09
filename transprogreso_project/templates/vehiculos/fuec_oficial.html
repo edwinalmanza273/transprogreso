@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FUEC Oficial</title>
+
+    <link rel="stylesheet" href="{% static 'fuec/fuec.css' %}">
+
+    <style>
+        body {
+            background-image: url("{% static 'img/fondo.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center top;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo-container img {
+            height: 75px;
+            margin: 0 40px;
+        }
+
+        table {
+            width: 95%;
+            margin: 10px auto;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th {
+            background: #d9d9d9;
+            padding: 4px;
+            text-align: left;
+        }
+
+        td {
+            padding: 4px;
+        }
+
+        .seccion-title {
+            background: #c0c0c0;
+            font-weight: bold;
+            padding: 6px;
+            margin-top: 15px;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="logo-container">
+    <img src="{% static 'fuec/logo_colombia.png' %}">
+    <img src="{% static 'fuec/logo_supertransporte.png' %}">
+    <img src="{% static 'fuec/logo_transprogreso.png' %}">
+</div>
+
+<h2 class="center">FORMATO ÚNICO DE EXTRACTO DEL CONTRATO DEL SERVICIO PÚBLICO DE TRANSPORTE TERRESTRE AUTOMOTOR ESPECIAL</h2>
+<h3 class="center">No. FUEC-{{ f.numero_fuec }}</h3>
+
+<br>
+
+<table>
+    <tr><th colspan="4">CONTRATO:</th></tr>
+    <tr>
+        <td colspan="4">TRANSPROGRESO S.A.S - NIT: 900.606.558-4</td>
+    </tr>
+
+    <tr><th colspan="4">OBJETO CONTRATO:</th></tr>
+    <tr>
+        <td colspan="4">{{ f.objeto_contrato }}</td>
+    </tr>
+
+    <tr><th colspan="4">ORIGEN - DESTINO:</th></tr>
+    <tr>
+        <td colspan="4">{{ f.origen_destino }}</td>
+    </tr>
+</table>
+
+<div class="seccion-title">VIGENCIA DEL CONTRATO</div>
+
+<table>
+    <tr>
+        <th>FECHA INICIAL</th>
+        <td>{{ f.fecha_inicial }}</td>
+        <th>DÍA</th>
+        <td>{{ f.fecha_inicial|date:"d" }}</td>
+        <th>MES</th>
+        <td>{{ f.fecha_inicial|date:"m" }}</td>
+        <th>AÑO</th>
+        <td>{{ f.fecha_inicial|date:"Y" }}</td>
+    </tr>
+
+    <tr>
+        <th>FECHA VENCIMIENTO</th>
+        <td>{{ f.fecha_final }}</td>
+        <th>DÍA</th>
+        <td>{{ f.fecha_final|date:"d" }}</td>
+        <th>MES</th>
+        <td>{{ f.fecha_final|date:"m" }}</td>
+        <th>AÑO</th>
+        <td>{{ f.fecha_final|date:"Y" }}</td>
+    </tr>
+</table>
+
+<div class="seccion-title">CARACTERÍSTICAS DEL VEHÍCULO</div>
+
+<table>
+    <tr>
+        <th>PLACA</th>
+        <td>{{ f.vehiculo.placa }}</td>
+        <th>MODELO</th>
+        <td>{{ f.vehiculo.modelo }}</td>
+        <th>AÑO</th>
+        <td>{{ f.vehiculo.modelo }}</td>
+    </tr>
+
+    <tr>
+        <th>MARCA</th>
+        <td>{{ f.vehiculo.marca }}</td>
+        <th>CLASE</th>
+        <td>{{ f.vehiculo.clase }}</td>
+    </tr>
+
+    <tr>
+        <th>NÚMERO INTERNO</th>
+        <td>{{ f.vehiculo.numero_interno }}</td>
+        <th>NÚMERO TARJETA DE OPERACIÓN</th>
+        <td>{{ f.numero_tarjeta_operacion }}</td>
+    </tr>
+</table>
+
+<div class="seccion-title">CONDUCTORES</div>
+
+<table>
+    <tr>
+        <th>NOMBRE</th>
+        <th>CÉDULA</th>
+        <th>VIGENCIA</th>
+    </tr>
+
+    {% for c in f.conductores.all %}
+    <tr>
+        <td>{{ c.nombre }}</td>
+        <td>{{ c.cedula }}</td>
+        <td>{{ c.vigencia_licencia }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="seccion-title">RESPONSABLE DEL CONTRATANTE</div>
+
+<table>
+    <tr>
+        <th>NOMBRE</th>
+        <td>{{ f.responsable_nombre }}</td>
+        <th>CÉDULA</th>
+        <td>{{ f.responsable_cedula }}</td>
+        <th>TELÉFONO</th>
+        <td>{{ f.responsable_telefono }}</td>
+    </tr>
+</table>
+
+</body>
+</html>

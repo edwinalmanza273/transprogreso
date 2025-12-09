@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FUEC Oficial</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            background: url("{% static 'fuec/fuec_oficial_bg.png' %}") center top no-repeat;
+            background-size: cover;
+            padding: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 4px;
+        }
+
+        .seccion {
+            background: #d9d9d9;
+            font-weight: bold;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>

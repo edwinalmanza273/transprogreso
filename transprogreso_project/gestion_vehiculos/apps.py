@@ -1,0 +1,10 @@
+from django.apps import AppConfig
+
+class GestionVehiculosConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'gestion_vehiculos'
+
+    def ready(self):
+        import gestion_vehiculos.signals
+
+

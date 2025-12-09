@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transprogreso</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .content-wrapper {
+            min-height: calc(100vh - 80px);
+            padding-bottom: 40px;
+        }
+        footer {
+            background: #343a40;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- ==========================
+            NAVBAR SUPERIOR
+    =========================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="{% url 'inicio' %}">
+                🚍 Transprogreso
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <!-- MENÚ IZQUIERDA -->
+                <ul class="navbar-nav me-auto">
+
+                    {% if request.user.is_authenticated %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'vehiculos' %}">Vehículos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'conductores' %}">Conductores</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'clientes' %}">Clientes</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'asignaciones' %}">Asignaciones</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'fuec' %}">FUEC</a>
+                    </li>
+
+                    <!-- MENÚ DE REPORTES -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Reportes</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'reporte_vehiculos' %}">Vehículos</a></li>
+                            <li><a class="dropdown-item" href="{% url 'reporte_conductores' %}">Conductores</a></li>
+                            <li><a class="dropdown-item" href="{% url 'reporte_clientes' %}">Clientes</a></li>
+                            <li><a class="dropdown-item" href="{% url 'reporte_fuec' %}">FUEC</a></li>
+                            <li><a class="dropdown-item" href="{% url 'reporte_alertas' %}">Alertas</a></li>
+                        </ul>
+                    </li>
+
+                    {% endif %}
+
+                    {% if request.user.is_authenticated and request.user.perfil.rol == "ADMIN" %}
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="/admin/">Administración</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+
+                <!-- MENÚ DERECHA -->
+                <ul class="navbar-nav">
+
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item text-white me-3 mt-2">
+                        Rol: <strong>{{ request.user.perfil.get_rol_display }}</strong>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="{% url 'logout' %}">Cerrar sesión</a>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{% url 'login' %}">Ingresar</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- ==========================
+            MENSAJES
+    =========================== -->
+    <div class="container mt-3">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
+    <!-- ==========================
+            CONTENIDO
+    =========================== -->
+    <div class="content-wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    <!-- ==========================
+                FOOTER
+    =========================== -->
+    <footer>
+        © {{ now|date:"Y" }} Transprogreso · Sistema de Gestión de Transporte
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

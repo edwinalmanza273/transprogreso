@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FUEC {{ f.pk }}</title>
+
+    <link rel="stylesheet" href="{% static 'fuec/fuec.css' %}">
+</head>
+
+<body>
+
+<div class="hoja-fondo">
+    <img src="{% static 'fuec/fuec_oficial_bg.png' %}" class="fondo">
+</div>
+
+<div class="contenido">
+
+    <div class="header">
+        <img src="{% static 'fuec/logo_colombia.png' %}" class="logo-colombia">
+        <img src="{% static 'fuec/logo_transprogreso.png' %}" class="logo-empresa">
+    </div>
+
+    <h2 class="titulo">FORMATO ÚNICO DE EXTRACTO DEL CONTRATO - FUEC</h2>
+
+    <table class="tabla-info">
+        <tr>
+            <td><b>ID FUEC:</b></td>
+            <td>{{ f.pk }}</td>
+        </tr>
+        <tr>
+            <td><b>Objeto del Contrato:</b></td>
+            <td>{{ f.objeto_contrato }}</td>
+        </tr>
+        <tr>
+            <td><b>Origen / Destino:</b></td>
+            <td>{{ f.origen_destino }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Fecha Inicio:</b></td>
+            <td>{{ f.fecha_inicio }}</td>
+        </tr>
+
+        <tr>
+            <td><b>Fecha Fin:</b></td>
+            <td>{{ f.fecha_fin }}</td>
+        </tr>
+    </table>
+
+    <h3 class="subtitulo">DATOS DEL VEHÍCULO</h3>
+    <table class="tabla-info">
+        <tr><td><b>Placa:</b></td><td>{{ f.vehiculo.placa }}</td></tr>
+        <tr><td><b>Marca:</b></td><td>{{ f.vehiculo.marca }}</td></tr>
+        <tr><td><b>Modelo:</b></td><td>{{ f.vehiculo.modelo }}</td></tr>
+    </table>
+
+    <h3 class="subtitulo">DATOS DEL CONDUCTOR</h3>
+    <table class="tabla-info">
+        <tr><td><b>Nombre:</b></td><td>{{ f.conductor.nombres }} {{ f.conductor.apellidos }}</td></tr>
+        <tr><td><b>Cédula:</b></td><td>{{ f.conductor.cedula }}</td></tr>
+        <tr><td><b>Teléfono:</b></td><td>{{ f.conductor.telefono }}</td></tr>
+    </table>
+
+    <h3 class="subtitulo">CÓDIGO DE VERIFICACIÓN</h3>
+    <div class="qr-box">
+        <img src="data:image/png;base64,{{ qr }}" class="qr">
+    </div>
+
+    <div class="firma">
+        <img src="{% static 'fuec/firma_sello_transprogreso.png' %}" class="firma-img">
+        <p><b>Representante Legal</b><br>TRANSPROGRESO</p>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h2 class="mb-3">⚠ Alertas de Vencimiento</h2>
+
+    {% include 'alertas/lista.html' %}
+
+</div>
+{% endblock %}
+
+@login_required
+def alertas(request):
+    return render(request, "alertas/lista.html")

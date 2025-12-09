@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Detalles FUEC {{ fuec.numero }}</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Cliente:</strong> {{ fuec.cliente.nombre }}</li>
+        <li class="list-group-item"><strong>Vehículo:</strong> {{ fuec.vehiculo.placa }}</li>
+        <li class="list-group-item"><strong>Conductor:</strong> {{ fuec.conductor.nombre }}</li>
+        <li class="list-group-item"><strong>Ruta:</strong> {{ fuec.ruta }}</li>
+        <li class="list-group-item"><strong>Fecha Inicio:</strong> {{ fuec.fecha_inicio }}</li>
+        <li class="list-group-item"><strong>Fecha Fin:</strong> {{ fuec.fecha_fin }}</li>
+    </ul>
+
+    <a href="{% url 'fuec_pdf' fuec.id %}" class="btn btn-success mt-3">Descargar PDF</a>
+    <a href="{% url 'fuec' %}" class="btn btn-secondary mt-3">Volver</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,230 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>FUEC {{ fuec.numero }}</title>
+
+<style>
+/* FONDO OFICIAL */
+body {
+    background-image: url("{% static 'fuec/fuec_oficial_bg.png' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 40px;
+}
+
+/* LOGOS */
+.header-logos {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo-colombia {
+    width: 180px;
+}
+.logo-super {
+    width: 200px;
+}
+.logo-trans {
+    width: 240px;
+}
+
+/* TÍTULO */
+h1 {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* TABLAS OFICIALES */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+
+td {
+    border: 1px solid #000;
+    padding: 5px;
+    font-size: 13px;
+}
+
+.section-title {
+    background: #ddd;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px;
+}
+
+/* QR */
+.qr {
+    width: 120px;
+}
+
+/* FIRMA */
+.firma {
+    width: 180px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGOS -->
+<div class="header-logos">
+    <img src="{% static 'fuec/logo_colombia.png' %}" class="logo-colombia">
+    <img src="{% static 'fuec/logo_supertransporte.png' %}" class="logo-super">
+    <img src="{% static 'fuec/logo_transprogreso.png' %}" class="logo-trans">
+</div>
+
+<h1>FORMATO ÚNICO DE EXTRACTO DEL CONTRATO – FUEC</h1>
+
+<!-- SECCIÓN 1 — DATOS DE LA EMPRESA -->
+<table>
+    <tr><td colspan="4" class="section-title">1. DATOS DE LA EMPRESA</td></tr>
+
+    <tr>
+        <td>Razón social:</td>
+        <td colspan="3">TRANSPROGRESO S.A.S.</td>
+    </tr>
+
+    <tr>
+        <td>NIT:</td>
+        <td>900606558-4</td>
+        <td>Licencia operación:</td>
+        <td>—</td>
+    </tr>
+
+    <tr>
+        <td>Dirección:</td>
+        <td>Avenida Quito No. 45A – 76 Barrio Belalcazar</td>
+        <td>Teléfono:</td>
+        <td>744 44 44</td>
+    </tr>
+
+    <tr>
+        <td>Ciudad:</td>
+        <td colspan="3">Bogotá D.C – Cundinamarca</td>
+    </tr>
+</table>
+
+<!-- SECCIÓN 2 — VEHÍCULO -->
+<table>
+    <tr><td colspan="4" class="section-title">2. VEHÍCULO HABILITADO</td></tr>
+
+    <tr>
+        <td>Placa:</td>
+        <td>{{ fuec.vehiculo.placa }}</td>
+        <td>Marca:</td>
+        <td>{{ fuec.vehiculo.marca }}</td>
+    </tr>
+
+    <tr>
+        <td>Modelo:</td>
+        <td>{{ fuec.vehiculo.modelo }}</td>
+        <td>Clase:</td>
+        <td>{{ fuec.vehiculo.clase }}</td>
+    </tr>
+
+    <tr>
+        <td>Tarjeta de operación:</td>
+        <td>{{ fuec.vehiculo.tarjeta_operacion }}</td>
+        <td>SOAT vencimiento:</td>
+        <td>{{ fuec.vehiculo.soat_vencimiento }}</td>
+    </tr>
+
+    <tr>
+        <td>Tecnomecánica:</td>
+        <td>{{ fuec.vehiculo.tecnomecanica_vencimiento }}</td>
+        <td>Contractual:</td>
+        <td>{{ fuec.vehiculo.poliza_contractual_vencimiento }}</td>
+    </tr>
+
+    <tr>
+        <td>Extrajudicial:</td>
+        <td colspan="3">{{ fuec.vehiculo.poliza_extrajudicial_vencimiento }}</td>
+    </tr>
+</table>
+
+<!-- SECCIÓN 3 — CONDUCTOR -->
+<table>
+    <tr><td colspan="4" class="section-title">3. CONDUCTOR</td></tr>
+
+    <tr>
+        <td>Nombre completo:</td>
+        <td colspan="3">{{ fuec.conductor.nombres }} {{ fuec.conductor.apellidos }}</td>
+    </tr>
+
+    <tr>
+        <td>Cédula:</td>
+        <td>{{ fuec.conductor.cedula }}</td>
+        <td>Teléfono:</td>
+        <td>{{ fuec.conductor.telefono }}</td>
+    </tr>
+</table>
+
+<!-- SECCIÓN 4 — CONTRATO -->
+<table>
+    <tr><td colspan="4" class="section-title">4. INFORMACIÓN DEL CONTRATO</td></tr>
+
+    <tr>
+        <td>Número FUEC:</td>
+        <td>{{ fuec.numero }}</td>
+        <td>Cliente:</td>
+        <td>{{ fuec.cliente.nombre }}</td>
+    </tr>
+
+    <tr>
+        <td>Identificación cliente:</td>
+        <td>{{ fuec.cliente.identificacion }}</td>
+        <td>Tipo:</td>
+        <td>{{ fuec.cliente.tipo }}</td>
+    </tr>
+
+    <tr>
+        <td>Objeto contrato:</td>
+        <td colspan="3">{{ fuec.objeto_contrato }}</td>
+    </tr>
+
+    <tr>
+        <td>Origen – destino:</td>
+        <td colspan="3">{{ fuec.origen_destino }}</td>
+    </tr>
+
+    <tr>
+        <td>Fecha inicio:</td>
+        <td>{{ fuec.fecha_inicio }}</td>
+        <td>Fecha fin:</td>
+        <td>{{ fuec.fecha_fin }}</td>
+    </tr>
+</table>
+
+<!-- SECCIÓN 5 — FIRMA Y QR -->
+<table>
+    <tr>
+        <td style="text-align:center">
+            <img src="{% static 'fuec/firma_sello_transprogreso.png' %}" class="firma"><br>
+            <strong>Firma digital autorizada</strong>
+        </td>
+
+        <td style="text-align:center; width: 200px;">
+            <img src="{{ qr_image }}" class="qr"><br>
+            <strong>Validación QR</strong>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+
+
+
+
+
+

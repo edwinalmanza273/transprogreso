@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .dash-card {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        transition: 0.2s ease-in-out;
+        min-height: 200px;
+    }
+
+    .dash-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+
+    .dash-number {
+        font-size: 48px;
+        font-weight: bold;s
+        color: #0c0c0cff; /* Azul nice */
+        margin-bottom: 10px;
+    }
+
+    .dash-label {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #444;
+    }
+
+    /* === BOTÓN NEGRO CON TEXTO BLANCO === */
+    .dash-btn {
+        margin-top: 15px;
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        background-color: #000000 !important; /* Negro */
+        color: white !important;             /* Blanco */
+        border: none;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .dash-btn:hover {
+        background-color: #333333 !important; /* Gris oscuro */
+        color: #ffffff !important;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Dashboard General</h2>
+
+    <div class="row">
+
+        <!-- Vehículos -->
+        <div class="col-md-4 mb-4">
+            <div class="dash-card">
+                <div class="dash-number">{{ total_vehiculos }}</div>
+                <div class="dash-label">Vehículos registrados</div>
+                <a href="{% url 'vehiculos' %}" class="dash-btn">Ver vehículos</a>
+            </div>
+        </div>
+
+        <!-- Conductores -->
+        <div class="col-md-4 mb-4">
+            <div class="dash-card">
+                <div class="dash-number">{{ total_conductores }}</div>
+                <div class="dash-label">Conductores registrados</div>
+                <a href="{% url 'conductores' %}" class="dash-btn">Ver conductores</a>
+            </div>
+        </div>
+
+        <!-- FUEC -->
+        <div class="col-md-4 mb-4">
+            <div class="dash-card">
+                <div class="dash-number">{{ total_fuec }}</div>
+                <div class="dash-label">FUEC emitidos</div>
+                <a href="{% url 'fuec' %}" class="dash-btn">Ver FUEC</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+

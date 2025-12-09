@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingreso al sistema</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body style="background-color: #222;">
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card p-4 shadow" style="width: 350px; border-radius: 10px;">
+        <h4 class="text-center mb-3">Ingreso al sistema</h4>
+
+        {% if error %}
+        <div class="alert alert-danger text-center">
+            Credenciales incorrectas
+        </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    placeholder="Usuario" 
+                    name="username" 
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    placeholder="Contraseña" 
+                    name="password" 
+                    required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+

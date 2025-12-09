@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Nueva revisión preventiva{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <h3>Nueva revisión preventiva</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Guardar</button>
+    <a class="btn btn-outline-secondary" href="{% url 'alertas_vencimiento' %}">Cancelar</a>
+  </form>
+</div>
+{% endblock %}
+

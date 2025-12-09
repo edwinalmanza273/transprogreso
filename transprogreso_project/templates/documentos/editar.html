@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Editar Documento{% endblock %}
+{% block content %}
+<h2>Editar / Subir renovado</h2>
+
+<form method="post" enctype="multipart/form-data" class="mt-3">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" id="programar_despues" name="programar_despues">
+    <label class="form-check-label" for="programar_despues">
+      Programar revisión después de guardar
+    </label>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Guardar</button>
+  <a class="btn btn-secondary" href="{% url 'alertas_vencimiento' %}">Cancelar</a>
+</form>
+{% endblock %}
+

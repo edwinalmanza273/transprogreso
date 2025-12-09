@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Reporte de Conductores</h2>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Licencia</th>
+            <th>Categoría</th>
+            <th>Vencimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in conductores %}
+        <tr>
+            <td>{{ c.cedula }}</td>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.licencia }}</td>
+            <td>{{ c.categoria }}</td>
+            <td>{{ c.licencia_vencimiento }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

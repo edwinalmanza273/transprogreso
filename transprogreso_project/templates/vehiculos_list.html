@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card shadow p-4">
+    <h3>🚐 Vehículos</h3>
+    <hr>
+
+    <a class="btn btn-success mb-3" href="/vehiculos/nuevo/">➕ Agregar Vehículo</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Placa</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Clase</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for v in vehiculos %}
+            <tr>
+                <td>{{ v.placa }}</td>
+                <td>{{ v.marca }}</td>
+                <td>{{ v.modelo }}</td>
+                <td>{{ v.clase }}</td>
+
+                <td>
+                    <a href="/vehiculos/editar/{{ v.id }}/" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="/vehiculos/eliminar/{{ v.id }}/" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">No hay vehículos registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Cargar documento{% endblock %}
+{% block content %}
+<h3>Cargar documento (frente y reverso)</h3>
+<form method="post" enctype="multipart/form-data" class="mt-3">
+  {% csrf_token %}
+  <div class="row g-3">
+    <div class="col-md-6">{{ form.vehiculo.label_tag }} {{ form.vehiculo }}</div>
+    <div class="col-md-6">{{ form.conductor.label_tag }} {{ form.conductor }}</div>
+    <div class="col-md-6">{{ form.tipo.label_tag }} {{ form.tipo }}</div>
+    <div class="col-md-6">{{ form.fecha_vencimiento.label_tag }} {{ form.fecha_vencimiento }}</div>
+    <div class="col-md-6">{{ form.archivo_frente.label_tag }} {{ form.archivo_frente }}</div>
+    <div class="col-md-6">{{ form.archivo_reverso.label_tag }} {{ form.archivo_reverso }}</div>
+    <div class="col-12">{{ form.observaciones.label_tag }} {{ form.observaciones }}</div>
+  </div>
+  <div class="mt-3">
+    <button class="btn btn-success">Guardar y validar</button>
+    <a class="btn btn-outline-secondary" href="{% url 'lista_vehiculos' %}">Cancelar</a>
+  </div>
+</form>
+{% endblock %}
